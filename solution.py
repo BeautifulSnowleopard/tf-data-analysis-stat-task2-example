@@ -7,11 +7,19 @@ from scipy.stats import norm
 chat_id = 123456 # Ваш chat ID, не меняйте название переменной
 
 def solution(p: float, x: np.array) -> tuple:
-    # Измените код этой функции
-    # Это будет вашим решением
-    # Не меняйте название функции и её аргументы
-    alpha = 1 - p
-    loc = x.mean()
-    scale = np.sqrt(np.var(x)) / np.sqrt(len(x))
-    return loc - scale * norm.ppf(1 - alpha / 2), \
-           loc - scale * norm.ppf(alpha / 2)
+    # вычисляем степени свободы
+    df = len(x) - 1
+    # вычисляем выборочное среднее и выборочную смещенную оценку дисперсии
+    mean = np.mean(x)
+    var = np.var(x, ddof=1)
+
+    # вычисляем левую и правую границы доверительного интервала
+    left = np.sqrt(df * var / chi2.ppf(1 - p/2, df))
+    right = np.sqrt(df * var / chi2.ppf(p/2, df))
+
+    return (mean - left, mean + right)
+
+
+
+
+

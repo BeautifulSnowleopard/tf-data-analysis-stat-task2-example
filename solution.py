@@ -9,8 +9,8 @@ chat_id = 1897874711
 def solution(p: float, x: np.array) -> tuple:
     alpha = 1 - p
     size = len(x)
-    left = np.sqrt(size * (x ** 2).mean() / (58 * chi2.ppf(q=1 - alpha / 2, df=2 * size)))
-    right = np.sqrt(size * (x ** 2).mean() / (58 * chi2.ppf(q=alpha / 2, df=2 * size)))
+    left = np.sqrt(size * (x ** 2).mean() / (29 * chi2.ppf(q=1 - alpha / 2, df=2 * size)))
+    right = np.sqrt(size * (x ** 2).mean() / (29 * chi2.ppf(q=alpha / 2, df=2 * size)))
     
     return left, \
            right

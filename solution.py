@@ -7,15 +7,9 @@ from scipy.stats import norm, chi2
 chat_id = 1897874711
 
 def solution(p: float, x: np.array) -> tuple:
-    # вычисляем степени свободы
-    df = len(x) - 1
-
-    # вычисляем выборочное среднее и выборочную смещенную оценку дисперсии
-    mean = np.mean(x)
-    var = np.var(x, ddof=1)
-
-    # вычисляем левую и правую границы доверительного интервала
-    left = np.sqrt(df * var / chi2.ppf(1 - p/2, df))
-    right = np.sqrt(df * var / chi2.ppf(p/2, df))
-    
-    return (mean - left, mean + right)
+    n = len(x)
+    chi_sq = chi2.ppf(p, df=2*n)
+    s = sum([d**2 for d in x])/n
+    left = s*2*n/chi_sq
+    right = s*2*n/chi2.ppf(1-p, df=2*n)
+    return (left, right)

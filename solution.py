@@ -4,7 +4,7 @@ import numpy as np
 from scipy.stats import norm
 
 
-chat_id = 123456 # Ваш chat ID, не меняйте название переменной
+chat_id = 1897874711
 
 def solution(p: float, x: np.array) -> tuple:
     # вычисляем степени свободы
